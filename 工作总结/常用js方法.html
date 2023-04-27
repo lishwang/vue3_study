@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    http-equiv="X-UA-Compatible"
+    content="IE=edge"
+  >
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    /**
+    判断数据类型
+    **/
+    // 判断是否为数字类型
+    toString.call(1); // '[object Number]'
+
+    Object.prototype.toString.call(1); // '[object Number]'
+
+    // 判断是否为字符串类型
+    toString.call('a'); // '[object String]'
+    toString.call('a').slice(8).slice(0, -1); // 'String'
+
+    // 判断是否为null
+    toString.call(null); // '[object Null]'
+
+    // 判断是否为undefined
+    toString.call(undefined); // '[object Undefined]'
+
+    // 判断是否为函数类型
+    toString.call(function () { }); // '[object Function]'
+
+    // 判断是否为对象类型
+    toString.call({}); // '[object Object]'
+
+    // 判断是否为数组类型
+    toString.call([]); // '[object Array]'
+
+    // 判断是否为symbol类型 《===》 Symbol(1)为定义的symbol类型值
+    toString.call(Symbol(1)); // '[object Symbol]'
+
+    // 单独写一个类型名，表示构造函数，使用此方法判断为 Function 类型
+    // 例如单独写一个 Symbol 表示构造函数，判断为 Function
+    toString.call(Symbol); // '[object Function]'
+
+
+    /**
+      保留小数
+      payload：数字、字符串
+      accuracy：精确度
+    **/
+    getToFixed(payload, accuracy) {
+      if (!Number(payload)) {
+        // 非数字返回
+        return;
+      }
+      // 返回字符串（toFixed() 方法默认返回字符串）
+      return Number(payload).toFixed(accuracy);
+      // 返回数字
+      return Number(Number(payload).toFixed(accuracy));
+      return +Number(payload).toFixed(accuracy);
+      return Number(payload).toFixed(accuracy) - 0;
+    }
+
+
+
+    /**
+      Object 常用方法
+    **/
+    // 通过复制一个或多个对象来创建一个新的对象
+    // 可以用来拷贝一个对象（只拷贝一层）；使用： Object.assign({}， obj);
+    // 注意：会改变目标对象，以及返回改变后的目标对象；
+    Object.assign();
+    // eg
+    const o1 = { a: 1, b: 1, c: 1 };
+    const o2 = { b: 2, c: 2 };
+    const o3 = { c: 3 };
+    const obj = Object.assign(o1, o2, o3);
+    console.log(obj); // { a: 1, b: 2, c: 3 }
+    console.log(o1); // { a: 1, b: 2, c: 3 }
+
+    // 使用指定的原型对象和属性创建一个新对象
+    Object.create();
+
+
+    /**
+      Map() 的使用
+    **/
+    // 1、删除对象中的部分属性
+    const obj = {
+      a: 'a',
+      b: 'b',
+      c: 'c',
+      d: 'd'
+    }
+    // 方法一：
+    delete obj.a;
+
+    // 方法二：
+    const objMap = new Map(Object.entries(obj)); // objMap = [{"key": "a","value": "a"},{"key": "b","value": "b"},{"key": "c","value": "c"},{"key": "d","value": "d"}]
+    objMap.forEach((_v, k) => {
+      if (objMap.has(a)) {
+        objMap.delete(a);
+      }
+    })
+    // 将map类型转换成对象
+    const newObj = Object.fromEntries(objMap);
+
+
+    /**
+      Array 常用方法
+    **/
+
+    /**
+      Symbol 数据类型
+    **/
+
+
+    /**
+     * 判断 对象 中是否有某属性
+    */
+    // 方法一：hasOwnProperty
+    const a = obj.hasOwnProperty('a');
+
+    // 方法二：in
+    const aFlag = 'a' in obj;
+
+    /**
+     * 删除对象中的某个属性
+    */
+    // 方法一：b 就是 删除 a 后的对象
+    let { a, ...b } = obj;
+
+
+
+    /**
+    TODO 搜索：
+    1、js 安全随机数 window.crypto及其兼容性；
+    2、判断 a===b
+    3、判断当前系统为 windows
+    4、判断当前系统是 Android
+    5、判断当前系统是 iOS
+    6、两次url相同跳转报错
+    7、对象的浅拷贝与深拷贝
+    **/
+  </script>
+</body>
+
+</html>
