@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    http-equiv="X-UA-Compatible"
+    content="IE=edge"
+  >
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script src="./renderer.js"></script>
+
+  <script>
+    // 1、通过 h 函数创建 vnode
+    const vnode = h('div', { class: 'wls' }, [
+      h('h2', { id: 'wls' }, '当前计数'),
+      h('div', { class: 'buttonBox' }, [
+        h('button', null, '+1'),
+        h('button', null, '-1'),
+      ])
+    ])
+
+    // 2、通过 mount 函数，将 vnode 挂载到 div#app 上
+    mount(vnode, document.querySelector('#app'));
+
+    // 3、创建新的 vnode，模拟更新
+    // const vnode2 = h('div', { class: 'newWls', id: '123' }, 'hhh');
+    // patch(vnode, vnode2);
+
+    setTimeout(() => {
+      const vnode2 = h('div', { class: 'newWls', id: '123' }, [
+        h('h2', { id: 'wls' }, '当前计数222222222222222222222'),
+        h('div', { class: 'buttonBox2222' }, [
+          h('button', null, '+1222222'),
+          h('button', null, '-122222222'),
+        ])
+      ]);
+      patch(vnode, vnode2);
+    }, 2000)
+  </script>
+</body>
+
+</html>

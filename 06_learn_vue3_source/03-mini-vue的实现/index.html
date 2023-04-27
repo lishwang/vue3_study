@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    http-equiv="X-UA-Compatible"
+    content="IE=edge"
+  >
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <title>mini-vue</title>
+</head>
+
+<body>
+  <!-- 自己实现 vue 的响应式系统 以及 渲染器 -->
+  <div id="app"></div>
+
+  <script src="../01-渲染器的实现/renderer.js"></script>
+  <script src="../02-响应式的实现/reactive.js"></script>
+  <script src="./index.js"></script>
+  <script>
+    // 创建根组件
+    const App = {
+      // 调用 响应式系统中 reactive 方法
+      data: reactive({
+        counter: 0,
+      }),
+      render () {
+        return h('div', null, [
+          h('h2', null, `当前计数${this.data.counter}`),
+          h('button', {
+            onClick: () => {
+              this.data.counter++;
+            }
+          }, '+1')
+        ])
+      }
+    }
+
+    const app = createApp(App);
+    app.mount('#app');
+  </script>
+</body>
+
+</html>

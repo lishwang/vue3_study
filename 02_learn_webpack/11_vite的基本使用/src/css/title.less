@@ -1,0 +1,11 @@
+@fontSize: 50px;
+@fontColor: red;
+
+.title {
+	font-size: @fontSize;
+	color: @fontColor;
+
+	// 验证 vite 会不会自动给样式加上浏览器前缀
+	// 需要借助 postcss 以及其插件 postcss-preset-env；需要先安装两者，然后在 postcss.config.js 文件中配置
+	user-select: none;
+}

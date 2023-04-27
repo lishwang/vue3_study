@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    http-equiv="X-UA-Compatible"
+    content="IE=edge"
+  >
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <!-- 因为 main.js 文件内有 import 这种es模块的导入，虽然浏览器已经可以解析 import 等这种es模块，
+    但是script标签里面需要加上 type="module" 这个属性 -->
+  <script
+    src="./src/main.js"
+    type="module"
+  ></script>
+</body>
+
+</html>
