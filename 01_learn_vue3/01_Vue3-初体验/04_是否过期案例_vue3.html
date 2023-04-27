@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- <script src="https://unpkg.com/vue@next"></script> -->
+  <script src="../js/vue3.js"></script>
+  <script>
+    Vue.createApp({
+      template: `
+        <div style="width:100%;height:100%">
+          <div style="margin:50px,50px;">
+          <span>生产日</span><input v-model="counter1" /><br/><br/>
+          <span>保质期</span><input v-model="counter2" /><br/><br/>
+          <button @click="increment">计算是否过期</button>
+          <h2>{{counted}}</h2>
+        </div>
+        </div>`,
+      data:function() {
+        return {
+          counter1: '',
+          counter2: '',
+          counted: '',
+        }
+      },
+      methods: {
+        increment() {
+          this.counted = this.counter2 - (30 - this.counter1);
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>

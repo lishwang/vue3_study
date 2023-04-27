@@ -1,0 +1,9 @@
+.title {
+	/* 该属性需要加上浏览器前缀才能生效，因此需要 PostCSS 插件自动帮忙加上浏览器前缀 */
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	    -ms-user-select: none;
+	        user-select: none;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRleHQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0NBQ0MsZ0RBQWdEO0NBQ2hELHlCQUFpQjtJQUFqQixzQkFBaUI7S0FBakIscUJBQWlCO1NBQWpCLGlCQUFpQjtBQUNsQiIsImZpbGUiOiJ0ZXh0RW5kLmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi50aXRsZSB7XHJcblx0Lyog6K+l5bGe5oCn6ZyA6KaB5Yqg5LiK5rWP6KeI5Zmo5YmN57yA5omN6IO955Sf5pWI77yM5Zug5q2k6ZyA6KaBIFBvc3RDU1Mg5o+S5Lu26Ieq5Yqo5biu5b+Z5Yqg5LiK5rWP6KeI5Zmo5YmN57yAICovXHJcblx0dXNlci1zZWxlY3Q6IG5vbmU7XHJcbn1cclxuIl19 */

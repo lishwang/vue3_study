@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <template id="my-app">
+    <h2>{{msg}}</h2>
+    <!-- 使用局部组件 -->
+    <component-a></component-a>
+  </template>
+
+  <template id="component-a">
+    <h2>{{aaa}}</h2>
+  </template>
+  <script src="../js/vue3.js"></script>
+  <script>
+    const componentA = {
+      template: '#component-a',
+      data() {
+        return{
+          aaa: '222'
+        }
+      }
+    }
+    const App = {
+      template: '#my-app',
+
+      // 注册局部组件，并挂载在组件实例上
+      components: {
+        // 组件名称注册时可以用 小驼峰，但使用时用 短横线
+        // 组件名称：组件内容
+        // 'component-a': componentA,
+        // componentA: componentA,
+        // es6 简写
+        componentA
+      },
+      data() {
+        return {
+          msg: '111'
+        }
+      }
+    }
+    const app = Vue.createApp(App)
+    app.mount('#app')
+  </script>
+</body>
+</html>

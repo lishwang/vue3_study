@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- 解析器在加载时会处理<template>元素，这样做只是为了确保这些内容有效，但元素内容不会被渲染 -->
+  <template>
+    <h2>这部分内容不渲染</h2>
+  </template>
+
+  <template id="why">
+    <div>
+      <h2>{{counter}}</h2>
+      <button @click="increment">+1</button>
+      <button @click="decrement">-1</button>
+    </div>
+  </template>
+
+  <script src="../js/vue3.js"></script>
+  <script>
+    Vue.createApp({
+
+      // 如果字符串以 # 开始，那么它将被用作 querySelector ，并且使用匹配元素的 innerHTML 作为模板字符串
+      template: '#why',
+      data:function() {
+        return {
+          counter: 100,
+        }
+      },
+      methods: {
+        increment() {
+          this.counter++;
+        },
+        decrement() {
+          this.counter--;
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>

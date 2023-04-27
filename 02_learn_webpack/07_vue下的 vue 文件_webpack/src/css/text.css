@@ -1,0 +1,6 @@
+.title {
+	/* 该属性需要加上浏览器前缀才能生效，因此需要 PostCSS 插件自动帮忙加上浏览器前缀 */
+	/* npx postcss --use autoprefixer -o ./src/css/textEnd.css ./src/css/text.css */
+	/* 通过以上命令，打包到 ./src/css/textEnd.css 文件内 */
+	user-select: none;
+}

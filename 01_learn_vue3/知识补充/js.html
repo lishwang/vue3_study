@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    http-equiv="X-UA-Compatible"
+    content="IE=edge"
+  >
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- <script src="../js/vue3.js"></script> -->
+  <script>
+    const app = {
+      data () {
+        return {}
+      },
+      methods: {
+
+      }
+    }
+    // 前置条件
+    const obj = { name: 'wls', age: 18, friends: { sex: '男' } };
+    const newObj = {};
+    const newDeepObj = {};
+
+    // 对象的深拷贝与浅拷贝
+    // 浅拷贝 -- 方法一
+    // 此方法只拷贝第一层，如果第二层及以后的为 引用类型，则拷贝引用地址；
+    const newObj1 = Object.assign({}, obj);
+
+    // 深拷贝 -- 方法一
+    const newDeepObj1 = JSON.parse(JSON.stringify(obj));
+
+    // 深拷贝 -- 方法二
+    function isObject (obj) {
+      return typeof obj === 'object' && obj !== null
+    }
+    function deepCopy (source) {
+      if (!isObject(source)) return source; //如果不是对象的话直接返回
+      let target = Array.isArray(source) ? [] : {} //数组兼容
+      for (var k in source) {
+        if (source.hasOwnProperty(k)) {
+          if (typeof source[k] === 'object') {
+            target[k] = deepCopy(source[k])
+          } else {
+            target[k] = source[k]
+          }
+        }
+      }
+      return target
+    }
+
+    // 判断 a 和 b 是否相等
+    function isEqual (a, b) {
+      const classNameA = toString.call(a);
+      const classNameB = toString.call(b);
+      // 如果数据类型不相等，则返回 false
+      if (classNameA !== classNameB) {
+        return false;
+      } else {
+        // 如果数据类型相等，再根据不同数据类型分别判断
+        if (classNameA === '[object Object]') {
+          for (const key in a) {
+            if (!isEqual(a[key], b[key])) {
+              return false;
+            }
+          }
+          for (const key in b) {
+            if (!isEqual(a[key], b[key])) {
+              return false
+            }
+          }
+          return true;
+        } else if (classNameA === '[object Array]') {
+          if (a.length !== b.length) {
+            return false;
+          } else {
+            return a.every((_v, i) => isEqual(a[i], b[i]))
+          }
+        } else if (classNameA === '[object, Function]') {
+          return a.toString() === b.toString();
+        } else {
+          return Object.is(a, b);
+        }
+      }
+    }
+
+
+    /**
+     * 数组排序1
+     * 规则一：a-z aa-zz
+     * 规则二：a1-a10-a20-a100
+     * 规则三：数字排序
+    */
+    // const arr = ['c11', 'a11', 'a1', 'b', 'b22', 'a5', 'a100', '动画1', '得到5', 'aa', '22', 'cc2', 'bb1', 'aa2', '0', '100', '3'];
+    const arr1 = ['AA', 'A', 'V', 'VV', 'BB', 'B', 'C'];
+    const arr2 = ['a11', 'a111', 'a1', 'a', 'a22', 'a5', 'a100'];
+    const arr22222222 = ['AAA11', 'AAA111', 'AAA1', 'AAA', 'AAA22', 'AAA5', 'AAA100'];
+    const arr3 = ['5', '4', '8', '3', '0', '9', '45'];
+    arr.sort((a, b) => {
+      const regA = a.match(/[^0-9]+/g) ? a.match(/[^0-9]+/g)[0] : '';
+      const regB = b.match(/[^0-9]+/g) ? b.match(/[^0-9]+/g)[0] : '';
+      if (regA.length !== regB.length) {
+        return regA.length - regB.length;
+      } else if (regA !== regB) {
+        return regA > regB ? 1 : -1;
+      } else if (regA === regB) {
+        const regNumA = a.match(/[0-9]+/g) ? a.match(/[0-9]+/g)[0] : '';
+        const regNumB = b.match(/[0-9]+/g) ? b.match(/[0-9]+/g)[0] : '';
+        return regNumA - regNumB;
+      }
+    })
+
+    /**
+     * 数组排序2
+     * 规则一：A-AA-AAA-B-BB-C-Z
+     * 规则二：A-A1-A11-A111-A2-A22-A3-A9
+    */
+    const arr21 = ['AA', 'A', 'V', 'VV', 'BB', 'B', 'C'];
+    const arr22 = ['a11', 'a111', 'a1', 'a', 'a22', 'a5', 'a100'];
+    arr.sort((a, b) => {
+      return a.localeCompare(b);
+    })
+
+
+    /**
+     * 工作中遇到的bug
+    */
+
+    // 解决两次访问相同路由地址报错
+    const originalPush = VueRouter.prototype.push;
+    VueRouter.prototype.push = function push (location) {
+      return originalPush.call(this, location).catch(err => err)
+    }
+
+    /**
+     * 获取元素位置
+     * getBoundingClientRect()
+     * 
+    */
+
+    // 用户视口高度
+    document.body.offsetHeight()
+    // 获取元素位置
+    document.getElementById('app').getBoundingClientRect();
+
+
+    /**
+     * 判断 obj 是否是 promise 对象，即判断对象是否具有 done 、fail 、always 、then 函数。
+     */
+    var isDefer = function (defer) {
+      return defer && typeof defer.done === 'function' && typeof defer.fail === 'function'
+        && typeof defer.always === 'function' && typeof defer.then === 'function';
+    }
+
+    /**
+     * 遍历对象属性建议使用 Object.keys， for in 会枚举到对象的原型链上的属性；
+     */
+
+
+    /**
+     * 判断一个变量是不是另一个变量的实例： instanceof 
+    */
+    const arr = [];
+    arr instanceof Array;  // true
+
+
+    /**
+     * Date 时间的一些属性及方法
+    */
+    // toUTCString()  转换时间的一种格式
+    new Date('2020-01-01').toUTCString();  // 'Wed, 01 Jan 2020 00:00:00 GMT'
+
+
+    /**
+     * in / of 运算符的用法
+    */
+    // in 判断对象中是否有某个属性，如果指定的属性在指定的对象或其原型链中，则 in 运算符返回 true
+    let obj1 = {
+      aa: 1,
+      bb: 2
+    }
+    'aa' in obj1;  // true
+  </script>
+</body>
+
+</html>

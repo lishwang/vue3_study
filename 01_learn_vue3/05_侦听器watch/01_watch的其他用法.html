@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <template id="my-app">
+    <h2>{{wls.name}}</h2>
+    <button @click="changeName">changeName</button>
+    <button @click="changeWls">changeWls</button>
+  </template>
+  <script src="../js/vue3.js"></script>
+  <script>
+    const app = {
+      template: '#my-app',
+      data() {
+        return {
+          wls: {
+            name: 'www',
+          }
+        }
+      },
+      watch: {
+        // 监听属性本身变化
+        // wls: function(newValue, oldValue) {
+        //   console.log(newValue, oldValue);
+        // },
+
+        // 监听属性本身的变化，可以把方法放入 methods 中，这里直接函数名的字符串即可，如下：
+        // wls: 'wlsFunction',
+
+        // 监听引用类型内部某一个属性值的变化
+        // 'wls.name': function(newValue,oldValue) {
+        //   console.log(newValue,oldValue)
+        // }
+
+        // 监听引用类型内部属性值的变化
+        // wls: {
+        //   handler :function(newValue, oldValue) {
+        //     // 由于vue内部没有做引用类型的深拷贝，所以这里两个值都是改变之后的值；
+        //     console.log(newValue, oldValue)
+        //   },
+        //   deep: true,
+        // }
+
+        // 监听引用类型内部属性值的变化，可以把方法放入 methods 中，这里直接函数名的字符串即可，如下：
+        // wls: {
+        //   handler: 'wlsHandlerFunction',
+        //   deep: true,
+        // }
+
+        // 监听一个属性，可以传入多个回调函数
+        // wls: [
+        //   // 在methods中定义，这里就引用
+        //   'handler1',
+        //   function handler2(val, oldVal) {
+        //     console.log('handler2');
+        //   },
+        //   {
+        //     handler: function handler3(val, oldVal) {
+        //       console.log('handler3')
+        //     },
+        //     deep: true,
+        //   }
+        // ]
+      },
+      created() {
+        // 监听器也可以这样定义
+        // 参数一：监听的属性； 参数二：回调函数； 参数三：配置对象；
+        // 该方法有一个返回值；如果用该返回值去调用该方法，会取消侦听；*****************
+        // 注意：这里的回调函数可以用箭头函数，因为create是一个方法，有自己的作用域，作用域内的this指向组件实例
+        const unWatch = this.$watch('wls', (newValue, oldValue) => {
+          console.log(newValue, oldValue)
+        },{
+          deep: true,
+          // immediate: true,
+        })
+        // 取消侦听器，上面的那个侦听器就不会再执行，如果配置了immediate属性，会执行一次；
+        unWatch();
+      },
+      methods: {
+        changeWls() {
+          this.wls = {name: 'lll'}
+        },
+        changeName() {
+          this.wls.name = '222'
+        },
+        wlsFunction: function(newValue, oldValue) {
+          console.log(newValue, oldValue);
+        },
+        wlsHandlerFunction: function(newValue, oldValue) {
+            console.log(newValue, oldValue)
+        },
+        handler1() {
+          console.log('handler1')
+        }
+      }
+    }
+    Vue.createApp(app).mount('#app')
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <template id="my-app">
+    <h2>{{msg}}</h2>
+    <component-a></component-a>
+    <component-a></component-a>
+    <component-a></component-a>
+    <component-a></component-a>
+    <component-a></component-a>
+    <component-a></component-a>
+  </template>
+
+  <!-- 组件模板语法 -->
+  <template id="component-a">
+    <h2>{{aaa}}</h2>
+  </template>
+  
+  <script src="../js/vue3.js"></script>
+  <script>
+    const obj = {
+      template: '#my-app',
+      data() {
+        return {
+          msg: '111',
+        }
+      }
+    }
+    const app = Vue.createApp(obj);
+    // 注册全局组件 并挂载在vue实例上
+    // 第一个参数是 组件名
+    app.component('component-a',{
+      template: '#component-a',
+      data() {
+        return {
+          aaa: 'aaa'
+        }
+      }
+    })
+    app.mount('#app');
+  </script>
+</body>
+</html>

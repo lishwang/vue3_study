@@ -1,0 +1,8 @@
+.title {
+	color: red;
+	/* css可以用 16进制的 8 位数字表示，最后两位表示透明度，通过 postcss-preset-env 插件可以将 # 16 进制的 8 位数字 转换成 rgba( , , , ) 的格式 */
+	background-color: #12345678;
+
+	/* 用户是否能选中 */
+	user-select: none;
+}
